@@ -26,7 +26,7 @@ Can also be re-run to update settings.
 
 **State references:**
 @.planning/config.json (team configuration)
-@.planning/STATE.md (validates GSD is initialized)
+@.planning/ (validates GSD is initialized)
 
 **Outputs:**
 - `.planning/config.json` - Updated with team.member and team.sync settings
@@ -35,22 +35,17 @@ Can also be re-run to update settings.
 <process>
 
 <step name="check_prerequisites">
-Verify GSD planning state exists with required files:
+Verify GSD planning directory exists:
 
 ```bash
-MISSING=""
-[ ! -f .planning/STATE.md ] && MISSING="${MISSING} STATE.md"
-[ ! -f .planning/ROADMAP.md ] && MISSING="${MISSING} ROADMAP.md"
-[ ! -f .planning/MILESTONES.md ] && MISSING="${MISSING} MILESTONES.md"
-
-if [ -n "$MISSING" ]; then
-  echo "Error: GSD planning state incomplete. Missing files in .planning/:${MISSING}"
-  echo "Run /gsd:new-project first to initialize your planning state."
+if [ ! -d .planning ]; then
+  echo "Error: No .planning/ directory found."
+  echo "Run /gsd:new-project first to initialize your project."
   exit 1
 fi
 ```
 
-If any required files are missing, stop with error message listing which files are absent.
+If .planning/ directory does not exist, stop with error.
 </step>
 
 <step name="load_existing_config">
@@ -204,7 +199,7 @@ Settings updated. Changes take effect on next /gsd-teams:share.
 </output>
 
 <success_criteria>
-- [ ] GSD planning state validated (STATE.md, ROADMAP.md, MILESTONES.md)
+- [ ] GSD planning directory validated (.planning/ exists)
 - [ ] Member name resolved (from argument, config, or prompt)
 - [ ] Sync mode resolved (from argument, config, or prompt)
 - [ ] Settings saved to .planning/config.json with atomic write

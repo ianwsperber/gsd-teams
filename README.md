@@ -1,14 +1,23 @@
+# gsd-teams
+
+Add multi-developer and multi-session support to [GSD](https://github.com/glittercowboy/get-shit-done). Share planning documents across team members and parallel sessions, then consolidate milestones and status into unified views.
+
 <p align="center">
   <img src="assets/logo.jpg" alt="GSD Teams logo, adapted from the GSD project logo using Google Gemini" width="400">
 </p>
 
-# gsd-teams
-
-Team coordination for [GSD](https://github.com/glittercowboy/get-shit-done) planning state. Share progress across team members and parallel sessions, then consolidate milestones and status into unified views.
-
 ## What It Does
 
-gsd-teams extends GSD with multi-member and multi-session coordination. Each team member shares their `.planning/` state to a `.planning-shared/` directory, and a consolidation command aggregates milestones and status across the entire team. This enables distributed teams (or solo developers with parallel sessions) to stay aligned without manual status meetings.
+GSD is an amazing workflow! But is has no first-class support for multi-member workflows (development in teams), or multi-session workflows (single developer working on multiple parallel workstreams, i.e. using git worktrees). `gsd-teams` is a Claude Code plugin that extends GSD with multi-member and multi-session coordination. 
+
+As needed, each team member runs the `/gsd-teams:share` to sync `.planning/` files to a member directory `.planning-shared/team`. On milestone completion, a team member of CI should run the `/gsd-teams:consolidate` command to aggregate milestones and status across the entire team. In practice, the plugin is just a few convenience commands to establish a pattern for sharing and consolidating planning documents.
+
+This enables distributed teams (or solo developers with parallel sessions) to share project details and milestones without creating conflicts in the `.planning` directory, which remains uncommitted in the local project.
+
+### Key Concepts
+
+- `.planning` is never committed to git. It is GSD's local working directory.
+- `.planning-shared` is always committed to git. Developers decide if they want to share all project files, or just the summaries (`MILESTONES.md`, etc.)
 
 ## Prerequisites
 

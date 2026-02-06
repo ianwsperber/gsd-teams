@@ -26,6 +26,8 @@ This enables distributed teams (or solo developers with parallel sessions) to sh
 
 ## Installation
 
+Within Claude Code:
+
 ```
 /plugin marketplace add ianwsperber/gsd-teams
 /plugin install gsd-teams@gsd-teams

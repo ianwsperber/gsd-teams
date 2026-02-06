@@ -1,6 +1,6 @@
 {
   "name": "gsd-teams",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Multi-member team sharing and consolidation for GSD planning state.",
   "author": {
     "name": "Ian Walker-Sperber"

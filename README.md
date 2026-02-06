@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.jpg" alt="GSD Teams" width="400">
+</p>
+
 # gsd-teams
 
 Team coordination for [GSD](https://github.com/glittercowboy/get-shit-done) planning state. Share progress across team members and parallel sessions, then consolidate milestones and status into unified views.
@@ -176,3 +180,7 @@ This creates the directory structure `.planning-shared/team/ian/sessions/green/`
 ## License
 
 [MIT](LICENSE)
+
+---
+
+<sub>Logo adapted from the [GSD](https://github.com/glittercowboy/get-shit-done) project logo using Google Gemini.</sub>

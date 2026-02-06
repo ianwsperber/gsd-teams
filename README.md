@@ -4,7 +4,7 @@ Team coordination for [GSD](https://github.com/glittercowboy/get-shit-done) plan
 
 ## What It Does
 
-gsd-teams extends GSD with multi-member and multi-session coordination. Each team member shares their `.planning/` state to a shared directory, and a consolidation command aggregates milestones and status across the entire team. This enables distributed teams (or solo developers with parallel sessions) to stay aligned without manual status meetings.
+gsd-teams extends GSD with multi-member and multi-session coordination. Each team member shares their `.planning/` state to a `.planning-shared/` directory, and a consolidation command aggregates milestones and status across the entire team. This enables distributed teams (or solo developers with parallel sessions) to stay aligned without manual status meetings.
 
 ## Prerequisites
 
@@ -20,11 +20,11 @@ gsd-teams extends GSD with multi-member and multi-session coordination. Each tea
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `/gsd-teams:init` | Set up team configuration (member name, sync mode) |
-| `/gsd-teams:share` | Share planning state to team directory |
-| `/gsd-teams:consolidate` | Generate consolidated milestones and status |
+| Command | Flags | Description |
+|---------|-------|-------------|
+| `/gsd-teams:init` | `--name member-name` `--sync full\|shallow` | Set up team configuration (member name, sync mode) |
+| `/gsd-teams:share` | `--name member-name` `--shallow` | Share planning state to team directory |
+| `/gsd-teams:consolidate` | — | Generate consolidated milestones and status |
 
 ### Typical workflow
 
@@ -43,13 +43,13 @@ gsd-teams extends GSD with multi-member and multi-session coordination. Each tea
 
 ```mermaid
 flowchart TD
-    subgraph "Each Member Runs /gsd-teams:share"
-        P1["alice: .planning/"] -->|rsync| S1[".planning-shared/team/alice/"]
-        P2["bob: .planning/"] -->|rsync| S2[".planning-shared/team/bob/"]
-        P3["ian/green: .planning/"] -->|rsync| S3[".planning-shared/team/ian/sessions/green/"]
+    subgraph share ["Each Member Runs /gsd-teams#colon;share"]
+        P1["alice — .planning/"] -->|rsync| S1[".planning-shared/team/alice/"]
+        P2["bob — .planning/"] -->|rsync| S2[".planning-shared/team/bob/"]
+        P3["ian/green — .planning/"] -->|rsync| S3[".planning-shared/team/ian/sessions/green/"]
     end
 
-    subgraph "Any Member Runs /gsd-teams:consolidate"
+    subgraph consolidate ["Any Member Runs /gsd-teams#colon;consolidate"]
         S1 & S2 & S3 --> C[Consolidate]
         C --> M[".planning-shared/MILESTONES.md"]
         C --> ST[".planning-shared/STATUS.md"]

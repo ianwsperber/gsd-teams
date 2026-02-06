@@ -55,18 +55,13 @@ Generate consolidated views of all team members' planning activity.
 <process>
 
 <step name="check_prerequisites">
-Verify GSD planning state exists and team directory is populated.
+Verify GSD planning directory exists and team directory is populated.
 
 ```bash
-# Check for required GSD planning files
-MISSING=""
-[ ! -f .planning/STATE.md ] && MISSING="${MISSING} STATE.md"
-[ ! -f .planning/ROADMAP.md ] && MISSING="${MISSING} ROADMAP.md"
-[ ! -f .planning/MILESTONES.md ] && MISSING="${MISSING} MILESTONES.md"
-
-if [ -n "$MISSING" ]; then
-  echo "Error: GSD planning state incomplete. Missing files in .planning/:${MISSING}"
-  echo "Run /gsd:new-project first to initialize your planning state."
+# Check for GSD planning directory
+if [ ! -d .planning ]; then
+  echo "Error: No .planning/ directory found."
+  echo "Run /gsd:new-project first to initialize your project."
   exit 1
 fi
 ```
@@ -717,7 +712,7 @@ Local update:
 </output>
 
 <success_criteria>
-- [ ] GSD planning state validated (STATE.md, ROADMAP.md, MILESTONES.md)
+- [ ] GSD planning directory validated (.planning/ exists)
 - [ ] .planning-shared/team/ directory exists with members or sessions
 - [ ] Session directories discovered alongside flat member directories
 - [ ] MILESTONES.md generated with date-ordered milestones and member/session attribution

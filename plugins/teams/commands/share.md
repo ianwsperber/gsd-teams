@@ -47,22 +47,27 @@ Share your GSD planning state to an isolated member directory with a full audit 
 <process>
 
 <step name="check_prerequisites">
-Verify GSD planning state exists with required files:
+Verify GSD planning directory exists:
 
 ```bash
-MISSING=""
-[ ! -f .planning/STATE.md ] && MISSING="${MISSING} STATE.md"
-[ ! -f .planning/ROADMAP.md ] && MISSING="${MISSING} ROADMAP.md"
-[ ! -f .planning/MILESTONES.md ] && MISSING="${MISSING} MILESTONES.md"
-
-if [ -n "$MISSING" ]; then
-  echo "Error: GSD planning state incomplete. Missing files in .planning/:${MISSING}"
-  echo "Run /gsd:new-project first to initialize your planning state."
+if [ ! -d .planning ]; then
+  echo "Error: No .planning/ directory found."
+  echo "Run /gsd:new-project first to initialize your project."
   exit 1
+fi
+
+# Warn about missing files (non-blocking -- share still proceeds)
+WARNINGS=""
+[ ! -f .planning/STATE.md ] && WARNINGS="${WARNINGS}\n  - STATE.md missing (phase info will show as '?')"
+[ ! -f .planning/ROADMAP.md ] && WARNINGS="${WARNINGS}\n  - ROADMAP.md missing (milestone version will show as 'v?')"
+
+if [ -n "$WARNINGS" ]; then
+  echo "Warning: Some planning files are missing:${WARNINGS}"
+  echo "CHANGELOG entry will use placeholder values. Run /gsd:new-project to create these files."
 fi
 ```
 
-If any required files are missing, stop with error message listing which files are absent.
+The .planning/ directory must exist, but missing STATE.md and ROADMAP.md only produce warnings since the extract_context_for_changelog step already has 2>/dev/null fallbacks with defaults ("?", "v?").
 </step>
 
 <step name="resolve_member_name">
@@ -452,7 +457,7 @@ Note: .planning/ has uncommitted changes - share reflects uncommitted state
 </output>
 
 <success_criteria>
-- [ ] .planning/ directory exists with STATE.md, ROADMAP.md, MILESTONES.md
+- [ ] .planning/ directory exists (warns if STATE.md or ROADMAP.md missing)
 - [ ] Member name resolved (from argument, config, or user prompt)
 - [ ] Member name saved to config for future shares
 - [ ] Directory ${MEMBER_DIR}/ created

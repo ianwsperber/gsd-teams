@@ -218,7 +218,7 @@ fi
 </step>
 
 <step name="spawn_agents">
-Spawn gsd-team-reporter agent for each member/session entry in parallel batches.
+Spawn gsd-teams:gsd-team-reporter agent for each member/session entry in parallel batches.
 
 **Discover member directories and session subdirectories (two-level loop):**
 ```bash
@@ -258,18 +258,18 @@ ENTRY_LAST_VERSION=$(get_last_version "$MEMBER_KEY")
 [ -z "$ENTRY_LAST_VERSION" ] && ENTRY_LAST_VERSION="none"
 ```
 
-**For each entry, invoke gsd-team-reporter:**
+**For each entry, invoke gsd-teams:gsd-team-reporter:**
 Use Task tool to spawn agents. All Task() calls in a single message run in parallel.
 
 For batches of up to 8 entries, spawn agents with:
-- `subagent_type: "gsd-team-reporter"`
+- `subagent_type: "gsd-teams:gsd-team-reporter"`
 - `prompt`: Contains member directory, member_name, session_name, and last_version
 - `description`: "Extract: {member_key}"
 
 **Prompt template for each agent:**
 ```
 Task(
-  subagent_type: "gsd-team-reporter",
+  subagent_type: "gsd-teams:gsd-team-reporter",
   prompt: "<objective>Extract milestones and status for: ${MEMBER_KEY}</objective>
 <context>
 Member directory: ${ENTRY_DIR}

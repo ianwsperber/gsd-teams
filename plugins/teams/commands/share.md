@@ -275,12 +275,12 @@ If shallow, also display: "Shallow sync: excluding codebase/, debug/, research/,
 <step name="copy_planning_state">
 Copy .planning/ to shared directory by delegating to bounded sync subagent.
 
-**IMPORTANT:** Do NOT run rsync directly. Delegate to the gsd-team-sync agent which has strict execution boundaries preventing scope bleed to sibling directories.
+**IMPORTANT:** Do NOT run rsync directly. Delegate to the gsd-teams:gsd-team-sync agent which has strict execution boundaries preventing scope bleed to sibling directories.
 
 Spawn the sync subagent using the Task tool:
 
 ```
-Task: gsd-team-sync
+Task: gsd-teams:gsd-team-sync
 Parameters:
   SOURCE_DIR: .planning/
   DEST_DIR: ${MEMBER_DIR}

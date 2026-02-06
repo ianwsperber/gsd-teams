@@ -14,16 +14,16 @@ Thanks for your interest in contributing to gsd-teams. This guide covers the bas
 
 ### Commands
 
-All commands live in `plugins/teams/.claude-plugin/commands/` as Markdown files. Commands are user-invoked (slash commands), not auto-detected skills.
+All commands live in `plugins/teams/commands/` as Markdown files. Commands are user-invoked (slash commands), not auto-detected skills.
 
 To add a new command:
 - Create a `.md` file in the commands directory
-- Follow the existing naming pattern: `gsd-teams-{name}.md`
+- The filename becomes the command suffix (e.g., `share.md` → `/gsd-teams:share`)
 - Include YAML frontmatter with `allowed_tools` and `description`
 
 ### Agents
 
-Agent files live in `plugins/teams/.claude-plugin/agents/` and follow GSD agent structure:
+Agent files live in `plugins/teams/agents/` and follow GSD agent structure:
 - YAML frontmatter (allowed_tools, description)
 - Role and philosophy sections
 - Context and execution_flow with XML-style step tags

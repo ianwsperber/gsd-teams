@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "gsd-teams",
+  "version": "0.1.0",
+  "description": "Team coordination commands for GSD (Get Shit Done)",
+  "owner": {
+    "name": "Ian Walker-Sperber"
+  },
+  "plugins": [
+    {
+      "name": "gsd-teams",
+      "description": "Multi-member team sharing and consolidation for GSD planning state. Share progress, consolidate milestones, and track team status across parallel Claude sessions.",
+      "version": "0.1.0",
+      "source": "./plugins/teams",
+      "category": "productivity"
+    }
+  ]
+}

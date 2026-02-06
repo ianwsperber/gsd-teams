@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.jpg" alt="GSD Teams" width="400">
+  <img src="assets/logo.jpg" alt="GSD Teams logo, adapted from the GSD project logo using Google Gemini" width="400">
 </p>
 
 # gsd-teams
